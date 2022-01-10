@@ -62,7 +62,7 @@ public class ZadWarsztatowe2Steps {
 
     @And("^add to 'Cart'$")
     public void addToCart() {
-        WebElement addToCartBtn = driver.findElement(By.xpath("//button[@class='btn btn-primary add-to-cart']"));
+        WebElement addToCartBtn = driver.findElement(By.className("btn btn-primary add-to-cart"));
         addToCartBtn.click();
     }
 
