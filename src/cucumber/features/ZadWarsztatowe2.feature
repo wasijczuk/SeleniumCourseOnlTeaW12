@@ -16,19 +16,22 @@
 #sprawdź czy zamówienie znajduje się na liście ze statusem "Awaiting check payment"
 #i kwotą taką samą jak na zamówieniu dwa kroki wcześniej.
 
-  Feature: Buy new Sweaters
-    Scenario Outline:Buy Sweaters and pay
-      Given Web page https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account opened in browser
-      And log in to account
-      When search the Hummingbird Printed Sweater and select product
-      And select size: <size>
-      And selected quantity: <quantity>
-      And add to Cart
-#      And button 'proceed to checkout' and confirmed address pressed
-#      And selected 'shipping method'
-#      And selected 'payment'
-#      Then button 'order with an obligation to pay' pressed
-#      And taken screenshot with order confirmation and payment amount
-  Examples:
-      |size|quantity|
-      |M   |5       |
+Feature: Buy new Sweaters
+
+  Scenario Outline:Buy Sweaters and pay
+    Given Web page https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account opened in browser
+    And log in to account
+    When search the Hummingbird Printed Sweater and select product
+    And select size: <size>
+    And selected quantity: <quantity>
+    And add to Cart
+    And button 'proceed to checkout'
+    And confirmed address pressed
+    And selected 'shipping method'
+    And selected 'payment'
+    Then button 'order with an obligation to pay' pressed
+    And taken screenshot with order confirmation and payment amount
+
+    Examples:
+      | size | quantity |
+      | M    | 5        |

@@ -4,13 +4,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Collections;
 
 public class ZadWarsztatowe2Steps {
     private WebDriver driver;
@@ -62,10 +65,52 @@ public class ZadWarsztatowe2Steps {
         WebElement addToCartBtn = driver.findElement(By.xpath("//button[@class='btn btn-primary add-to-cart']"));
         addToCartBtn.click();
     }
-//
-//    And button 'proceed to checkout' and confirmed address pressed
-//    And selected 'shipping method'
-//    And selected 'payment'
-//    Then button 'order with an obligation to pay' pressed
-//    And taken screenshot with order confirmation and payment amount
+
+    @And("^button 'proceed to checkout'$")
+    public void checkoutAndAdress() {
+        WebElement checkoutBtn = driver.findElement(By.className("btn btn-primary"));
+        checkoutBtn.click();
+        WebElement finalCheckoutBtn = driver.findElement(By.className("btn btn-primary"));
+        finalCheckoutBtn.click();
+    }
+
+    @And("^confirmed address pressed$")
+    public void addressCorfirmed() {
+        WebElement addressCorfirmedInput = driver.findElement(By.name("id_address_delivery"));
+        addressCorfirmedInput.click();
+        WebElement continueBtn = driver.findElement(By.name("confirm-addresses"));
+        continueBtn.click();
+    }
+
+    @And("^selected 'shipping method'$")
+    public void shippingMethod() {
+        WebElement shippingMethodInput = driver.findElement(By.name("delivery_option[19478]"));
+        shippingMethodInput.click();
+        WebElement shippingMethodBtn = driver.findElement(By.name("confirmDeliveryOption"));
+        shippingMethodBtn.click();
+    }
+
+    @And("^selected 'payment'$")
+    public void payment() {
+        WebElement paymentInput = driver.findElement(By.id("payment-option-1"));
+        paymentInput.click();
+        WebElement checkboxInput = driver.findElement(By.id("conditions_to_approve[terms-and-conditions]"));
+        checkboxInput.click();
+
+    }
+
+    @Then("^button 'order with an obligation to pay' pressed$")
+    public void orderBtn() {
+        WebElement orderBtn = driver.findElement(By.className("btn btn-primary center-block"));
+        orderBtn.click();
+    }
+
+    @And("^taken screenshot with order confirmation and payment amount$")
+    public void takeScreenshot() throws IOException {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File tmpScreenshot = screenshot.getScreenshotAs(OutputType.FILE);
+        String currentDateTime = LocalDateTime.now().toString().replaceAll(":", "_");
+        Files.copy(tmpScreenshot.toPath(), Paths.get("C:", "test-evidence", "order-confirmation-and-payment" + currentDateTime + ".png"));
+    }
+
 }
