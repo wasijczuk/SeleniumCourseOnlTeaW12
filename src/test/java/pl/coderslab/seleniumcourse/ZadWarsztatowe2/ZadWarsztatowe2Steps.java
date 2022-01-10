@@ -60,7 +60,7 @@ public class ZadWarsztatowe2Steps {
         selectQuantity.sendKeys(quantity);
     }
 
-    @And("^add to Cart$")
+    @And("^add to 'Cart'$")
     public void addToCart() {
         WebElement addToCartBtn = driver.findElement(By.xpath("//button[@class='btn btn-primary add-to-cart']"));
         addToCartBtn.click();

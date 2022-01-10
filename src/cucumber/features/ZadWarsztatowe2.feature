@@ -24,7 +24,7 @@ Feature: Buy new Sweaters
     When search the Hummingbird Printed Sweater and select product
     And select size: <size>
     And selected quantity: <quantity>
-    And add to Cart
+    And add to 'Cart'
     And button 'proceed to checkout'
     And confirmed address pressed
     And selected 'shipping method'
