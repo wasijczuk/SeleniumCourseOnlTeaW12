@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Collections;
+
 
 public class ZadWarsztatowe2Steps {
     private WebDriver driver;
@@ -61,16 +61,20 @@ public class ZadWarsztatowe2Steps {
     }
 
     @And("^add to 'Cart'$")
-    public void addToCart() {
-        WebElement addToCartBtn = driver.findElement(By.className("btn btn-primary add-to-cart"));
+    public void addToCartBtn() {
+        WebElement addToCartBtn = driver.findElement(By.cssSelector("button.add-to-cart"));
         addToCartBtn.click();
+//        WebElement addToCartBtn = driver.findElement(By.xpath("//button[@class='btn btn-primary add-to-cart']"));
+//        addToCartBtn.click();
     }
 
+
     @And("^button 'proceed to checkout'$")
-    public void checkoutAndAdress() {
-        WebElement checkoutBtn = driver.findElement(By.className("btn btn-primary"));
+    public void checkoutBtn() {
+        WebElement checkoutBtn = driver.findElement(By.cssSelector(".btn.btn-primary"));
         checkoutBtn.click();
-        WebElement finalCheckoutBtn = driver.findElement(By.className("btn btn-primary"));
+
+        WebElement finalCheckoutBtn = driver.findElement(By.cssSelector(".btn.btn-primary"));
         finalCheckoutBtn.click();
     }
 
