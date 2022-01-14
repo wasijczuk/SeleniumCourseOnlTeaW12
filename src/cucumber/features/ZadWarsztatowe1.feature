@@ -19,8 +19,10 @@ Feature: Log in and create new address
     And link 'addresses' pressed
     And link 'Create new address' pressed
     Then Form filled with data: <alias>, <address>, <city>, <postCode>, <country>, <phone>
-    And button 'save' clicked and confirmed address
-
+    And button 'save' clicked
+  And confirmed new address
+    And deleted new address
+    And confirmed address deleted
 
     Examples:
       | alias | address      | city         | postCode | country       | phone         |

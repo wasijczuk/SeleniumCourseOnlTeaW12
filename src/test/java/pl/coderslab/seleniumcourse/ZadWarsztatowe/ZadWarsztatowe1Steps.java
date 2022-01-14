@@ -78,9 +78,29 @@ public class ZadWarsztatowe1Steps {
         addressPage.filledFormAddress(userData);
     }
 
-    @And("^button 'save' clicked and confirmed address$")
+    @And("^button 'save' clicked$")
     public void clickSaveBtn() {
         WebElement saveBtn = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/form/footer/button"));
         saveBtn.click();
+    }
+
+    @And("^confirmed new address$")
+    public void confirmedNewAddress() {
+        WebElement successMessage = driver.findElement(By.xpath("/html/body/main/section/div/div/section/section/aside/div/article/ul/li"));
+        String successMessageText = successMessage.getText();
+        assertEquals("Address successfully added!", successMessageText);
+    }
+
+    @And("^deleted new address$")
+    public void deletedNewAddress() {
+        WebElement deletedNewAddressBtn = driver.findElement(By.xpath("/html/body/main/section/div/div/section/section/div[2]/article/div[2]/a[2]/span"));
+        deletedNewAddressBtn.click();
+    }
+
+    @And("^confirmed address deleted$")
+    public void confirmedAddressDeleted() {
+        WebElement successMessage2 = driver.findElement(By.xpath("/html/body/main/section/div/div/section/section/aside/div/article/ul/li"));
+        String successMessageText = successMessage2.getText();
+        assertEquals("Address successfully deleted!", successMessageText);
     }
 }
