@@ -31,6 +31,9 @@ Feature: Buy new Sweaters
     And selected 'payment'
     Then button 'order with an obligation to pay' pressed
     And taken screenshot with order confirmation and payment amount
+    And opened 'order history and details'
+    And confirmed order with 'Awaiting check payment'
+    And confirmed price
 
     Examples:
       | size | quantity |
